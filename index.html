@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>One Piece Cover Story Chronicles</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #ff6b6b, #ffd93d);
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(255, 255, 255, 0.1) 10px,
+                rgba(255, 255, 255, 0.1) 20px
+            );
+            animation: float 20s linear infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateX(-50px) translateY(-50px); }
+            100% { transform: translateX(50px) translateY(50px); }
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .header p {
+            font-size: 1.2em;
+            position: relative;
+            z-index: 1;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .story-item {
+            background: white;
+            margin-bottom: 25px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border-left: 5px solid #ff6b6b;
+        }
+
+        .story-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .story-header {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            padding: 20px;
+            border-bottom: 2px solid #dee2e6;
+        }
+
+        .story-title {
+            font-size: 1.4em;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .chapter-info {
+            color: #6c757d;
+            font-weight: 500;
+            font-size: 0.95em;
+        }
+
+        .adapted-badge {
+            display: inline-block;
+            background: #28a745;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            margin-left: 10px;
+            font-weight: bold;
+        }
+
+        .story-content {
+            padding: 20px;
+        }
+
+        .timeline {
+            background: #e8f4f8;
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border-left: 4px solid #17a2b8;
+            font-style: italic;
+            color: #0c5460;
+        }
+
+        .description {
+            margin-bottom: 15px;
+            color: #495057;
+            font-weight: 500;
+        }
+
+        .anime-adaptation {
+            background: #fff3cd;
+            padding: 10px 15px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            border-left: 4px solid #ffc107;
+            font-size: 0.9em;
+            color: #856404;
+        }
+
+        .links {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+
+        .link-btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 10px 18px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .link-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(135deg, #764ba2, #667eea);
+        }
+
+        .link-btn.narrated {
+            background: linear-gradient(135deg, #ff6b6b, #ffd93d);
+        }
+
+        .link-btn.narrated:hover {
+            background: linear-gradient(135deg, #ffd93d, #ff6b6b);
+        }
+
+        .note {
+            background: #d1ecf1;
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-top: 15px;
+            border-left: 4px solid #bee5eb;
+            font-size: 0.9em;
+            color: #0c5460;
+        }
+
+        .spoiler-warning {
+            background: #f8d7da;
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-top: 15px;
+            border-left: 4px solid #f5c6cb;
+            font-size: 0.9em;
+            color: #721c24;
+            font-weight: 500;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 30px;
+            background: #f8f9fa;
+            color: #6c757d;
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .story-header {
+                padding: 15px;
+            }
+            
+            .story-content {
+                padding: 15px;
+            }
+            
+            .links {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏴‍☠️ One Piece Cover Story Chronicles</h1>
+            <p>Complete guide to all cover stories with chapter ranges and adaptations</p>
+        </div>
+
+        <div class="content">
+            <div class="story-item">
+                <div class="story-header">
+                    <div class="story-title">
+                        #01: Buggy's Crew Adventure Chronicles
+                        <span class="adapted-badge">✓ Adapted</span>
+                    </div>
+                    <div class="chapter-info">ch35-75 = ep15-34</div>
+                </div>
+                <div class="story-content">
+                    <div class="timeline">Takes place between the events of Buggy's Arc and Loguetown</div>
+                    <div class="description">Buggy runs into Gaimon & then reunites with his crew + teams up with Alvida</div>
+                    <div class="anime-adaptation">Adapted by the anime in ep 46/47 (between Arlong Park & Loguetown)</div>
+                </div>
+            </div>
+
+            <div class="story-item">
+                <div class="story-header">
+                    <div class="story-title">
+                        #02: Diary of Koby-Meppo
+                        <span class="adapted-badge">✓ Adapted</span>
+                    </div>
+                    <div class="chapter-info">ch83-119 = ep38-73</div>
+                </div>
+                <div class="story-content">
+                    <div class="timeline">Takes place between the events of Captain Morgan's defeat and Post-Enies Lobby</div>
+                    <div class="description">Koby and Helmeppo being recruited by Garp & training at Marine HQ</div>
+                    <div class="anime-adaptation">Adapted by the anime in ep 68/69 (between Whiskey Peak & Little Garden)</div>
+                </div>
+            </div>
+
+            <div class="story-item">
+                <div class="story-header">
+                    <div class="story-title">#03: Jango's Dance Paradise</div>
+                    <div class="chapter-info">ch126-172 = ep76-108</div>
+                </div>
+                <div class="story-content">
+                    <div class="timeline">Takes place between the events of Baratie and Arabasta</div>
+                    <div class="links">
+                        <a href="https://imgur.com/a/fCK4AW1" class="link-btn" target="_blank">📖 Read on Imgur</a>
+                        <a href="https://www.youtube.com/watch?v=yDwMGo_8Z1I" class="link-btn narrated" target="_blank">🎥 Narrated Version</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="story-item">
+                <div class="story-header">
+                    <div class="story-title">#04: Hatchi's Sea-Floor Stroll</div>
+                    <div class="chapter-info">ch182-228 = ep112-148</div>
+                </div>
+                <div class="story-content">
+                    <div class="timeline">Takes place between the events of Arlong Park and Sabaody</div>
+                    <div class="links">
+                        <a href="https://imgur.com/a/LQtxiQX" class="link-btn" target="_blank">📖 Read on Imgur</a>
+                        <a href="https://www.youtube.com/watch?v=iVmQO7FmHpc" class="link-btn narrated" target="_blank">🎥 Narrated Version</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="story-item">
+                <div class="story-header">
+                    <div class="story-title">#05: Wapol's Omnivorous Hurrah</div>
+                    <div class="chapter-info">ch236-262 = ep152-172</div>
+                </div>
+                <div class="story-content">
+                    <div class="timeline">Takes place between the events of Drum Island and 3D2Y (timeskip)</div>
+                    <div class="links">
+                        <a href="https://imgur.com/a/xhOm7V1" class="link-btn" target="_blank">📖 Read on Imgur</a>
+                        <a href="https://www.youtube.com/watch?v=L3-By9EHd0Y" class="link-btn narrated" target="_blank">🎥 Narrated Version</a>
+                    </div>
+                    <div class="note">💡 Franky mentioned (during the Fish-Man Island battle) that he used Wapometal to build General Franky</div>
+                </div>
+            </div>
+
+            <div class="story-item">
+                <div class="story-header">
+                    <div class="story-title">#06: Ace's Great Blackbeard Search</div>
+                    <div class="chapter-info">ch272-305 = ep178-208</div>
+                </div>
+                <div class="story-content">
+                    <div class="timeline">Takes place between the events of Jaya & Post-Enies Lobby</div>
+                    <div class="links">
+                        <a href="https://imgur.com/a/KvSObZc" class="link-btn" target="_blank">📖 Read on Imgur</a>
+                        <a href="https://www.youtube.com/watch?v=x5dz4nxPkwE" class="link-btn narrated" target="_blank">🎥 Narrated Version</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="story-item">
+                <div class="story-header">
+                    <div class="story-title">#07: Gedatsu's Accidental Blue-Sea Life</div>
+                    <div class="chapter-info">ch314-348 = ep217-245</div>
+                </div>
+                <div class="story-content">
+                    <div class="timeline">Takes place between the events of Skypiea and 3D2Y (timeskip)</div>
+                    <div class="links">
+                        <a href="https://imgur.com/a/f7jehCp" class="link-btn" target="_blank">📖 Read on Imgur</a>
+                        <a href="https://www.youtube.com/watch?v=VRlU2voPE30" class="link-btn narrated" target="_blank">🎥 Narrated Version</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="story-item">
+                <div class="story-header">
+                    <div class="story-title">#08: Miss Goldenweek's "Operation: Meet Baroque Works"</div>
+                    <div class="chapter-info">ch359-413 = ep251-297</div>
+                </div>
+                <div class="story-content">
+                    <div class="timeline">Takes place between the events of Arabasta & Impel Down</div>
+                    <div class="links">
+                        <a href="https://imgur.com/a/nNU1oXe" class="link-btn" target="_blank">📖 Read on Imgur</a>
+                        <a href="https://www.youtube.com/watch?v=rTKaGJjeXJE" class="link-btn narrated" target="_blank">🎥 Narrated Version</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="story-item">
+                <div class="story-header">
+                    <div class="story-title">#09: Enel's Great Space Operations</div>
+                    <div class="chapter-info">ch428-474 = ep310-369</div>
+                </div>
+                <div class="story-content">
+                    <div class="timeline">Takes place after the events of Skypiea...</div>
+                    <div class="links">
+                        <a href="https://imgur.com/a/ttETzBf" class="link-btn" target="_blank">📖 Read on Imgur</a>
+                        <a href="https://www.youtube.com/watch?v=YZ-kynWR82o" class="link-btn narrated" target="_blank" style="text-decoration: line-through; opacity: 0.7;">🎥 Narrated Version</a>
+                    </div>
+                    <div class="note">Also includes "Where They Are Now #1 – Skypiea"</div>
+                    <div class="spoiler-warning">⚠️ Recommended to read this instead, since the narrated version's translation is wrong at times</div>
+                </div>
+            </div>
+
+            <div class="story-item">
+                <div class="story-header">
+                    <div class="story-title">#10: CP9's Independent Report</div>
+                    <div class="chapter-info">ch491-528 = ep386-425</div>
+                </div>
+                <div class="story-content">
+                    <div class="timeline">Takes place between the events of Enies Lobby and Dressrosa</div>
+                    <div class="links">
+                        <a href="https://imgur.com/a/uhzl4Gg" class="link-btn" target="_blank">📖 Read on Imgur</a>
+                        <a href="https://www.youtube.com/watch?v=m0bXKl4VZKw" class="link-btn narrated" target="_blank">🎥 Narrated Version</a>
+                    </div>
+                    <div class="note">Also includes "Where They Are Now #2 – Water 7"</div>
+                </div>
+            </div>
+
+            <div class="story-item">
+                <div class="story-header">
+                    <div class="story-title">
+                        #11-18: Straw Hat's Separation Serial
+                        <span class="adapted-badge">✓ Adapted</span>
+                    </div>
+                    <div class="chapter-info">ch543-560 = ep445-469</div>
+                </div>
+                <div class="story-content">
+                    <div class="timeline">Takes place between the events of Sabaody and Post-War</div>
+                    <div class="description">The other 8 Strawhats' shenanigans on their respective island, before they find out about the Summit War</div>
+                    <div class="anime-adaptation">Adapted by the anime in ep 418-421 (between Amazon Lily & Impel Down) and 453-456 (between Impel Down & Marineford)</div>
+                </div>
+            </div>
+
+            <div class="story-item">
+                <div class="story-header">
+                    <div class="story-title">#19: From the Decks of the World: post-3D2Y</div>
+                    <div class="chapter-info">ch613-668 = ep532-594</div>
+                </div>
+                <div class="story-content">
+                    <div class="timeline">Takes place between the events of Fish-Man Island and Dressrosa</div>
+                    <div class="links">
+                        <a href="https://imgur.com/a/96WD2sc" class="link-btn" target="_blank">📖 Read on Imgur</a>
+                        <a href="https://www.youtube.com/watch?v=Ui1lJltjdmk" class="link-btn narrated" target="_blank">🎥 Narrated Version</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="story-item">
+                <div class="story-header">
+                    <div class="story-title">#20: Caribou's Kehihihihi in the New World</div>
+                    <div class="chapter-info">ch674-731 = ep600-663</div>
+                </div>
+                <div class="story-content">
+                    <div class="timeline">Takes place after the events of Fish-Man Island...</div>
+                    <div class="links">
+                        <a href="https://imgur.com/a/78DZ6mN" class="link-btn" target="_blank">📖 Read on Imgur</a>
+                        <a href="https://www.youtube.com/watch?v=NA3pdmrJhyU" class="link-btn narrated" target="_blank">🎥 Narrated Version</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="story-item">
+                <div class="story-header">
+                    <div class="story-title">#21: Solo Journey of Jinbe, Knight of the Sea</div>
+                    <div class="chapter-info">ch751-785 = ep687-728</div>
+                </div>
+                <div class="story-content">
+                    <div class="timeline">Takes place after the events of Fish-Man Island...</div>
+                    <div class="links">
+                        <a href="https://imgur.com/a/4Jg9BHv" class="link-btn" target="_blank">📖 Read on Imgur</a>
+                        <a href="https://www.youtube.com/watch?v=KTvclAvKnrE" class="link-btn narrated" target="_blank">🎥 Narrated Version</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="story-item">
+                <div class="story-header">
+                    <div class="story-title">#22: From the Decks of the World: post-Dressrosa</div>
+                    <div class="chapter-info">ch805-838 = ep754-800</div>
+                </div>
+                <div class="story-content">
+                    <div class="timeline">Takes place after the events of Dressrosa...</div>
+                    <div class="links">
+                        <a href="https://imgur.com/a/5Wo0c6K" class="link-btn" target="_blank" style="opacity: 0.6;">📖 Spoiler Link</a>
+                        <a href="https://www.youtube.com/watch?v=842pPlEzbi4" class="link-btn narrated" target="_blank">🎥 Narrated Version</a>
+                    </div>
+                    <div class="spoiler-warning">⚠️ Can't read this one, since the chapter titles would spoil you (wait until after ep800 or watch narrated version)</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>🏴‍☠️ One Piece Cover Story Chronicles • Complete Reference Guide</p>
+            <p>All links and information preserved from original source</p>
+        </div>
+    </div>
+</body>
+</html>
